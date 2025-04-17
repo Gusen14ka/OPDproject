@@ -1,0 +1,6 @@
+SQLAlchemy>=1.4
+alembic
+asyncpg           # если используешь PostgreSQL; для SQLite можно не ставить
+APScheduler
+aiofiles          # опционально, если понадобится для асинхронных операций
+pytest
