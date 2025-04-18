@@ -1,3 +1,5 @@
+# Этот код вызывается ReminderScheduler. Его надо переделать под вызов тг-ботом
+# должен возвращать дто, которые будут использоваться для отправки уведомлений
 import asyncio
 from datetime import datetime
 from Core.Interfaces.ILessonRepository import ILessonRepository

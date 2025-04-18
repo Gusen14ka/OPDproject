@@ -4,7 +4,7 @@ from Infrastructure.Config import Base
 class TeacherDto(Base):
     __tablename__ = 'teachers'
 
-    self_id = Column(Integer, primary_key=True, index=True)
+    self_id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     name = Column(String(collation="NOCASE"), nullable=False)
     # Здесь для дисциплин можно использовать разные подходы:
     # 1. Хранить как текст, сериализовав список в JSON/строку

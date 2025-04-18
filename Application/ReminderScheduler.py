@@ -1,3 +1,4 @@
+# Этот код для вызова каждые 5 минут, по сути можно перенести ближе к тг
 import asyncio
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from Infrastructure.Config import async_session_factory
@@ -31,7 +32,7 @@ def start_reminder_scheduler():
     """
     scheduler = AsyncIOScheduler()
     # Добавляем задачу, которая будет выполняться каждые 5 минут
-    scheduler.add_job(reminder_job_runner, 'interval', minutes=5)
+    scheduler.add_job(reminder_job_runner, 'interval', minutes=1)
     scheduler.start()
     print("Сервис отправки уведомлений запущен (напоминания обрабатываются каждые 5 минут).")
 

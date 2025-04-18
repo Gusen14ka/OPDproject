@@ -4,7 +4,7 @@ from Infrastructure.Config import Base
 class StudentDto(Base):
     __tablename__ = 'students'
 
-    self_id = Column(Integer, primary_key=True, index=True)
+    self_id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     name = Column(String(collation="NOCASE"), nullable=False)
     timezone = Column(String, nullable=False)
     parent_name = Column(String(collation="NOCASE"), nullable=False)

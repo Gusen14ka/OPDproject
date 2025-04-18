@@ -87,3 +87,12 @@ class LessonRepository(ILessonRepository):
         )
         dtos = result.scalars().all()
         return [LessonMapper.to_entity(dto) for dto in dtos]
+
+    async def get_lessons_by_student_id_async(self, student_id: int) -> List[Lesson]:
+        """
+        Возвращает все уроки, связанные с данным student_id.
+        """
+        stmt = select(LessonDto).where(LessonDto.student_id == student_id)
+        result = await self.session.execute(stmt)
+        dtos = result.scalars().all()
+        return [LessonMapper.to_entity(dto) for dto in dtos]

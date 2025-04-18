@@ -3,7 +3,7 @@ from dataclasses import dataclass
 
 @dataclass
 class Lesson:
-    self_id: int
+    self_id: int | None
     time_slot_id: int  # Привязка к временному интервалу
     title: str
     teacher_id: int
@@ -28,6 +28,6 @@ class Lesson:
             raise ValueError("student_id должен быть >= 1")
         if len(title) > 100:
             raise ValueError("Макс. длина title 100 символов")
-        return cls(self_id if self_id is not None else 0, time_slot_id, title,
+        return cls(self_id, time_slot_id, title,
                    teacher_id, student_id)
 

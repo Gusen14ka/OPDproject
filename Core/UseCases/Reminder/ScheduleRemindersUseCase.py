@@ -47,8 +47,8 @@ class ScheduleRemindersUseCase:
         )
 
         # Получаем уроки для этих слотов
-        lesson_ids = [slot.self_id for slot in time_slots]
-        return await self._lesson_repo.get_lessons_by_time_slots_async(lesson_ids)
+        time_slot_ids = [slot.self_id for slot in time_slots]
+        return await self._lesson_repo.get_lessons_by_time_slots_async(time_slot_ids)
 
     async def _create_reminder(
             self,
@@ -64,7 +64,7 @@ class ScheduleRemindersUseCase:
         reminder_time = lesson_start - timedelta(hours=offset_hours)
 
         # Проверяем, не создано ли уже такое напоминание
-        existing = await self._reminder_repo.get_reminder_async(
+        existing = await self._reminder_repo.get_by_lesson_id_and_trigger_time_async(
             lesson_id=lesson.self_id,
             trigger_time=reminder_time
         )
@@ -76,6 +76,7 @@ class ScheduleRemindersUseCase:
             lesson_id=lesson.self_id,
             student_id=lesson.student_id,
             trigger_time=reminder_time,
+            time_before_lesson=timedelta(hours=offset_hours),
             is_sent=False
         )
 

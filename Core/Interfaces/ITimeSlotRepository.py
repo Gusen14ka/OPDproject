@@ -56,3 +56,7 @@ class ITimeSlotRepository(ABC):
     async def delete_slots_before_date_async(self, cutoff_date: date) -> None:
         """Удаляет слота, дата который ранее чем cutoff_date."""
         pass
+
+    @abstractmethod
+    async def get_time_slots_by_ids_async(self, ids: List[int]) -> List[TimeSlot]:
+        pass

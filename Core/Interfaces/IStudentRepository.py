@@ -22,3 +22,11 @@ class IStudentRepository(ABC):
     @abstractmethod
     async def delete_async(self, student_id: int) -> bool:
         pass
+
+    @abstractmethod
+    async def get_by_student_contact_async(self, student_contact: str) -> Optional[Student]:
+        pass
+
+    @abstractmethod
+    async def get_by_parent_contact_async(self, parent_contact: str) -> List[Student]:
+        pass

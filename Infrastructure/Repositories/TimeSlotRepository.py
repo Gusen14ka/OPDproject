@@ -102,4 +102,16 @@ class TimeSlotRepository(ITimeSlotRepository):
         await  self.session.execute(time_slots)
         await self.session.commit()
 
+    async def get_time_slots_by_ids_async(self, ids: List[int]) -> List[TimeSlot]:
+        """
+        Возвращает список тайм-слотов, у которых self_id входит в переданный список ids.
+        """
+        if not ids:
+            return []
+
+        stmt = select(TimeSlotDto).where(TimeSlotDto.self_id.in_(ids))
+        result = await self.session.execute(stmt)
+        dtos = result.scalars().all()
+        return [TimeSlotMapper.to_entity(dto) for dto in dtos]
+
 

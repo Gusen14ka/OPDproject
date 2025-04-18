@@ -3,7 +3,7 @@ from datetime import datetime, timedelta
 
 @dataclass
 class Reminder:
-    self_id: int
+    self_id: int | None
     lesson_id: int          # Ссылка на урок
     student_id: int            # ID пользователя (студент/преподаватель)
     trigger_time: datetime  # Когда отправить напоминание
@@ -26,5 +26,5 @@ class Reminder:
         if student_id < 1:
             raise ValueError("student_id должен быть >= 1")
 
-        return cls(self_id if self_id is not None else 0, lesson_id,
+        return cls(self_id, lesson_id,
                    student_id, trigger_time, time_before_lesson, is_sent)

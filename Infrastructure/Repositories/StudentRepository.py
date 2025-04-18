@@ -46,3 +46,21 @@ class StudentRepository(IStudentRepository):
             delete(StudentDto).where(StudentDto.self_id == student_id))
         await self.session.commit()
         return result.rowcount > 0
+
+    async def get_by_student_contact_async(self, student_contact: str) -> Optional[Student]:
+        """
+        Ищет студента по его контактам (полю student_contact).
+        """
+        stmt = select(StudentDto).where(StudentDto.student_contact == student_contact)
+        result = await self.session.execute(stmt)
+        dto = result.scalars().first()
+        return StudentMapper.to_entity(dto) if dto else None
+
+    async def get_by_parent_contact_async(self, parent_contact: str) -> List[Student]:
+        """
+        Возвращает список студентов по тегу родителя (parent_contact).
+        """
+        stmt = select(StudentDto).where(StudentDto.parent_contact == parent_contact)
+        result = await self.session.execute(stmt)
+        dtos = result.scalars().all()
+        return [StudentMapper.to_entity(dto) for dto in dtos]

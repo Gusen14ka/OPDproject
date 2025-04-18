@@ -3,7 +3,7 @@ from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker, Asyn
 from sqlalchemy.orm import declarative_base
 from sqlalchemy.event import listens_for
 
-DATABASE_URL = "sqlite+aiosqlite:///online_school.db"
+DATABASE_URL = "sqlite+aiosqlite:///online_school.db?mode=wal"
 
 engine = create_async_engine(DATABASE_URL, echo=True)
 
@@ -19,3 +19,9 @@ async_session_factory = async_sessionmaker(
 )
 
 Base = declarative_base()
+
+from Infrastructure.Dto.StudentDto import StudentDto
+from Infrastructure.Dto.TeacherDto import TeacherDto
+from Infrastructure.Dto.LessonDto import LessonDto
+from Infrastructure.Dto.TimeSlotDto import TimeSlotDto
+from Infrastructure.Dto.ReminderDto import ReminderDto

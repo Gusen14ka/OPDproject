@@ -38,3 +38,7 @@ class ILessonRepository(ABC):
     ) -> List[Lesson]:
         """Возвращает уроки, связанные с указанными слотами."""
         pass
+
+    @abstractmethod
+    async def get_lessons_by_student_id_async(self, student_id: int) -> List[Lesson]:
+        pass

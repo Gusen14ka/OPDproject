@@ -30,7 +30,7 @@ class Teacher:
             raise ValueError("Макс. длина telegram_tag 100 символов")
         if len(discord_tag) > 100:
             raise ValueError("Макс. длина discord_tag 100 символов")
-        return cls(self_id if self_id is not None else 0, name, subjects,
+        return cls(self_id, name, subjects,
                    requisites, telegram_tag, discord_tag)
 
 

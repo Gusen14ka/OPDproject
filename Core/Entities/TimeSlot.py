@@ -3,7 +3,7 @@ from dataclasses import dataclass
 
 @dataclass
 class TimeSlot:
-    self_id: int
+    self_id: int | None
     slot_date: date          # Дата слота (2023-10-05)
     start_time: time    # Начало (07:00)
     end_time: time      # Конец (07:30)
@@ -25,4 +25,4 @@ class TimeSlot:
             raise ValueError("Слот должен длиться 30 минут")
         if (self_id is not None) and (self_id < 1):
             raise ValueError("id должен быть >= 1")
-        return cls(self_id if self_id is not None else 0, slot_date, start_time, end_time, is_booked)
+        return cls(self_id, slot_date, start_time, end_time, is_booked)

@@ -1,9 +1,10 @@
 from dataclasses import dataclass
 @dataclass
 class Student:
-    self_id: int
+    self_id: int | None
     name: str
     timezone: str
+    parent_name: str
     parent_contact: str
     student_contact: str
     payment_status: int
@@ -15,6 +16,7 @@ class Student:
             self_id: int | None,
             name: str,
             timezone: str,
+            parent_name: str,
             parent_contact: str,
             student_contact: str,
             payment_status: int,
@@ -26,6 +28,8 @@ class Student:
             raise ValueError("Макс. длина name 100 символов")
         if len(timezone) > 100:
             raise ValueError("Макс. длина timezone 100 символов")
+        if len(parent_name) > 100:
+            raise ValueError("Макс. длина parent_name 100 символов")
         if len(parent_contact) > 100:
             raise ValueError("Макс. длина parent_contact 100 символов")
         if len(student_contact) > 100:
@@ -34,5 +38,5 @@ class Student:
             raise ValueError("payment_status должен быть положительным")
         if teacher_id < 1:
             raise ValueError("teacher_id должен быть >= 1")
-        return cls(self_id if self_id is not None else 0, name, timezone, parent_contact,
+        return cls(self_id, name, timezone, parent_name, parent_contact,
                    student_contact, payment_status, teacher_id)

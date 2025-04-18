@@ -31,7 +31,7 @@ class IReminderRepository(ABC):
         pass
 
     @abstractmethod
-    async def get_reminder_async(
+    async def get_by_lesson_id_and_trigger_time_async(
         self,
         lesson_id: int,
         trigger_time: datetime
